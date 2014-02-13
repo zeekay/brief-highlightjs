@@ -39,6 +39,7 @@ Contributors:
 - Loren Segal <lsegal@soen.ca>
 - Andrew Fedorov <dmmdrs@mail.ru>
 - Igor Kalnitsky <igor@kalnitsky.org>
+- Jeremy Hull <sourdrums@gmail.com>
 - Valerii Hiora <valerii.hiora@gmail.com>
 - Nikolay Zakharov <nikolay.desh@gmail.com>
 - Dmitry Kovega <arhibot@gmail.com>
@@ -51,6 +52,7 @@ Contributors:
 - Alexander Myadzel <myadzel@gmail.com>
 - Evgeny Stepanischev <imbolk@gmail.com>
 - Dmytrii Nagirniak <dnagir@gmail.com>
+- Oleg Efimov <efimovov@gmail.com>
 - Luigi Maselli <grigio.org@gmail.com>
 - Denis Bardadym <bardadymchik@gmail.com>
 - Aahan Krish <geekpanth3r@gmail.com>
@@ -84,6 +86,7 @@ Contributors:
 - Kelley van Evert <kelleyvanevert@gmail.com>
 - Kurt Emch <kurt@kurtemch.com>
 - Mehdi Dogguy <mehdi@dogguy.org>
+- Tomas Aparicio <tomas@aparicio.me>
 - Nicolas Braud-Santoni <nicolas.braud-santoni@ens-cachan.fr>
 - Ralf Bitter <rabit@revigniter.com>
 - Sylvestre Ledru <sylvestre.ledru@scilab-enterprises.com>

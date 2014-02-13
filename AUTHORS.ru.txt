@@ -39,6 +39,7 @@ URL:   http://highlightjs.org/
 - Лорен Сегал <lsegal@soen.ca>
 - Андрей Фёдоров <dmmdrs@mail.ru>
 - Игорь Кальницкий <igor@kalnitsky.org>
+- Джереми Халл <sourdrums@gmail.com>
 - Валерий Хиора <valerii.hiora@gmail.com>
 - Николай Захаров <nikolay.desh@gmail.com>
 - Дмитрий Ковега <arhibot@gmail.com>
@@ -51,6 +52,7 @@ URL:   http://highlightjs.org/
 - Александр Мядзель <myadzel@gmail.com>
 - Евгений Степанищев <imbolk@gmail.com>
 - Дмитрий Нагирняк <dnagir@gmail.com>
+- Олег Ефимов <efimovov@gmail.com>
 - Луиджи Мазелли <grigio.org@gmail.com>
 - Денис Бардадым <bardadymchik@gmail.com>
 - Аахан Криш <geekpanth3r@gmail.com>
@@ -84,6 +86,7 @@ URL:   http://highlightjs.org/
 - Келли ван Эверт <kelleyvanevert@gmail.com>
 - Курт Эмч <kurt@kurtemch.com>
 - Мейди Догги <mehdi@dogguy.org>
+- Томас Апарисио <tomas@aparicio.me>
 - Николя Бро-Сантони <nicolas.braud-santoni@ens-cachan.fr>
 - Ральф Биттер <rabit@revigniter.com>
 - Сильвестр Ледру <sylvestre.ledru@scilab-enterprises.com>
