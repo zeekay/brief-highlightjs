@@ -568,6 +568,12 @@ function() {
 
   var languages = {};
   var aliases = {};
+  var nohighlight = {
+    'no-highlight': 'no-highlight',
+    plain:          'no-highlight',
+    text:           'no-highlight',
+    txt:            'no-highlight',
+  };
 
   function registerLanguage(name, language) {
     var lang = languages[name] = language(this);
@@ -581,7 +587,7 @@ function() {
   }
 
   function getLanguage(name) {
-    return languages[name] || languages[aliases[name]];
+    return languages[name] || languages[aliases[name]] || nohighlight[name];
   }
 
   /* Interface definition */
