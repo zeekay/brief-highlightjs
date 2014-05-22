@@ -4,25 +4,58 @@ New features:
 
 - Add `listLanguages()` API method.
 - export.html merged into test.html.
+- C/C++/C# detection improved.
 - Added a bunch of aliases for languages and document current ones.
   Thanks to [Sindre Sorhus][] for background research.
 - Added phrasal English words to boost relevance in comments.
 - Include docs into the browser download and node.js package.
+- Many improvements to SQL definition made by [Heiko August][],
+  [Nikolay Lisienko][] and [Travis Odom][].
+- Add shorted `lang-` prefix for specifying what language will be
+  highlighted.
+  Thanks to [Jeff Escalante][].
+- Ruby's got support for interactive console sessions. Thanks to [Pascal Hurni][].
+- Deal with trailing commas errors. Thanks to [Jiyin Yiyong][].
+- Add built_in functions for R language. Thanks to [Artem A. Klevtsov][].
+- Rust got definitions for lifetime parameters and improved string syntax.
+  Thanks to [Roman Shmatov][].
+
+[Sindre Sorhus]: https://github.com/sindresorhus
+[Heiko August]: https://github.com/auge8472
+[Nikolay Lisienko]: https://github.com/neor-ru
+[Travis Odom]: https://github.com/Burstaholic
+[Jeff Escalante]: https://github.com/jenius
+[Pascal Hurni]: https://github.com/phurni
+[Jiyin Yiyong]: https://github.com/jiyinyiyong
+[Artem A. Klevtsov]: https://github.com/unikum
+[Roman Shmatov]: https://github.com/shmatov
 
 New languages and styles:
 
+- *Gherkin* by [Sam Pikesley][]
 - *Elixir* by [Josh Adams][]
 - *NSIS* by [Jan T. Sott][]
 - *VIM script* by [Jun Yang][]
 - *Protocol Buffers* by [Dan Tao][]
 - *Nix* by [Domen Kožar][]
+- *x86asm* by [innocenat][]
+- *Cap’n Proto* and *Thrift* by [Oleg Efimov][]
+- *Monkey* by [Arthur Bikmullin][]
+- *Kimbie* light and dark themes by [Jan T. Sott][]
+- *Color brewer* theme by [Fabrício Tavares de Oliveira][]
+- *Codepen.io embed* theme by [Justin Perry][]
 
-[Sindre Sorhus]: https://github.com/sindresorhus
+[Sam Pikesley]: https://github.com/pikesley
 [Josh Adams]: https://github.com/knewter
 [Jan T. Sott]: https://github.com/idleberg
 [Jun Yang]: https://github.com/harttle
 [Dan Tao]: https://github.com/dtao
 [Domen Kožar]: https://github.com/iElectric
+[innocenat]: https://github.com/innocenat
+[Oleg Efimov]: https://github.com/Sannis
+[Arthur Bikmullin]: https://github.com/devolonter
+[Fabrício Tavares de Oliveira]: https://github.com/fabriciotav
+[Justin Perry]: https://github.com/ourmaninamsterdam
 
 ## Version 8.0
 
@@ -73,7 +106,7 @@ New features:
   aliases can be specified in the class attribute of the code container in your
   HTML as well as in various API calls. For now there are only a few very common
   aliases but we'll expand it in the future. All of them are listed in the
-  [class reference][].
+  [class reference][cr].
 
 - Language detection can now be restricted to a subset of languages relevant in
   a given context — a web page or even a single highlighting call. This is

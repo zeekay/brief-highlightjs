@@ -1,15 +1,17 @@
-/* Base16 Atelier Lakeside Dark - Theme */
-/* by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/lakeside/) */ 
-/* Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16) */
-/* https://github.com/jmblog/color-themes-for-highlightjs */
+/*
+    Name:     Kimbie (dark)
+    Author:   Jan T. Sott
+    License:  Creative Commons Attribution-ShareAlike 4.0 Unported License
+    URL:      https://github.com/idleberg/Kimbie-highlight.js
+*/
 
-/* Atelier Lakeside Dark Comment */
+/* Kimbie Comment */
 .hljs-comment,
 .hljs-title {
-  color: #7195a8;
+  color: #d6baad;
 }
 
-/* Atelier Lakeside Dark Red */
+/* Kimbie Red */
 .hljs-variable,
 .hljs-attribute,
 .hljs-tag,
@@ -22,42 +24,41 @@
 .css .hljs-id,
 .css .hljs-class,
 .css .hljs-pseudo {
-  color: #d22d72;
+  color: #dc3958;
 }
 
-/* Atelier Lakeside Dark Orange */
+/* Kimbie Orange */
 .hljs-number,
 .hljs-preprocessor,
-.hljs-pragma,
 .hljs-built_in,
 .hljs-literal,
 .hljs-params,
 .hljs-constant {
-  color: #935c25;
+  color: #f79a32;
 }
 
-/* Atelier Lakeside Dark Yellow */
-.hljs-ruby .hljs-class .hljs-title,
+/* Kimbie Yellow */
+.ruby .hljs-class .hljs-title,
 .css .hljs-rules .hljs-attribute {
-  color: #8a8a0f;
+  color: #f06431;
 }
 
-/* Atelier Lakeside Dark Green */
+/* Kimbie Green */
 .hljs-string,
 .hljs-value,
 .hljs-inheritance,
 .hljs-header,
 .ruby .hljs-symbol,
 .xml .hljs-cdata {
-  color: #568c3b;
+  color: #889b4a;
 }
 
-/* Atelier Lakeside Dark Aqua */
+/* Kimbie Aqua */
 .css .hljs-hexcolor {
-  color: #2d8f6f;
+  color:: #088649;
 }
 
-/* Atelier Lakeside Dark Blue */
+/* Kimbie Blue */
 .hljs-function,
 .python .hljs-decorator,
 .python .hljs-title,
@@ -66,19 +67,19 @@
 .perl .hljs-sub,
 .javascript .hljs-title,
 .coffeescript .hljs-title {
-  color: #257fad;
+  color: #8ab1b0;
 }
 
-/* Atelier Lakeside Dark Purple */
+/* Kimbie Purple */
 .hljs-keyword,
 .javascript .hljs-function {
-  color: #5d5db1;
+  color: #98676a;
 }
 
 .hljs {
   display: inline-block;
-  background: #1f292e;
-  color: #7ea2b4;
+  background: #221a0f;
+  color: #d3af86;
   padding: 0.5em;
 }
 

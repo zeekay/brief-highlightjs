@@ -47,13 +47,17 @@ function(hljs) {
     contains: [NUMBER, STRING, VARIABLE, KEYWORD, QUOTED_LIST],
     variants: [
       {
-        begin: '[\'`]\\(', end: '\\)',
+        begin: '[\'`]\\(', end: '\\)'
       },
       {
         begin: '\\(quote ', end: '\\)',
-        keywords: {title: 'quote'},
+        keywords: {title: 'quote'}
       }
     ]
+  };
+  var QUOTED_ATOM = {
+    className: 'quoted',
+    begin: '\'' + LISP_IDENT_RE
   };
   var LIST = {
     className: 'list',
@@ -64,7 +68,7 @@ function(hljs) {
     relevance: 0
   };
   LIST.contains = [{className: 'title', begin: LISP_IDENT_RE}, BODY];
-  BODY.contains = [QUOTED, LIST, LITERAL, NUMBER, STRING, COMMENT, VARIABLE, KEYWORD];
+  BODY.contains = [QUOTED, QUOTED_ATOM, LIST, LITERAL, NUMBER, STRING, COMMENT, VARIABLE, KEYWORD];
 
   return {
     illegal: /\S/,
@@ -75,6 +79,7 @@ function(hljs) {
       STRING,
       COMMENT,
       QUOTED,
+      QUOTED_ATOM,
       LIST
     ]
   };
