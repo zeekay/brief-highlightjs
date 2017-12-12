@@ -2,6 +2,7 @@
 Language: Oracle Rules Language
 Author: Jason Jacobson <jason.a.jacobson@gmail.com>
 Description: The Oracle Utilities Rules Language is used to program the Oracle Utilities Applications acquired from LODESTAR Corporation.  The products include Billing Component, LPSS, Pricing Component etc. through version 1.6.1.
+Category: enterprise
 */
 
 function(hljs) {
@@ -54,8 +55,12 @@ function(hljs) {
       hljs.APOS_STRING_MODE,
       hljs.QUOTE_STRING_MODE,
       hljs.C_NUMBER_MODE,
-      { className: 'array',
-        begin: '\#[a-zA-Z\ \.]+'
+      {
+        className: 'literal',
+        variants: [
+          {begin: '#\\s+[a-zA-Z\\ \\.]*', relevance: 0}, // looks like #-comment
+          {begin: '#[a-zA-Z\\ \\.]+'}
+        ]
       }
     ]
   };

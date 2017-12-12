@@ -4,3 +4,6 @@ docs/_build
 .idea/
 __pycache__
 *.swp
+node_modules
+.project
+yarn.lock

@@ -2,6 +2,7 @@
 Language: Erlang
 Description: Erlang is a general-purpose functional language, with strict evaluation, single assignment, and dynamic typing.
 Author: Nikolay Zakharov <nikolay.desh@gmail.com>, Dmitry Kovega <arhibot@gmail.com>
+Category: functional
 */
 
 function(hljs) {
@@ -9,16 +10,13 @@ function(hljs) {
   var FUNCTION_NAME_RE = '(' + BASIC_ATOM_RE + ':' + BASIC_ATOM_RE + '|' + BASIC_ATOM_RE + ')';
   var ERLANG_RESERVED = {
     keyword:
-      'after and andalso|10 band begin bnot bor bsl bzr bxor case catch cond div end fun let ' +
-      'not of orelse|10 query receive rem try when xor',
+      'after and andalso|10 band begin bnot bor bsl bzr bxor case catch cond div end fun if ' +
+      'let not of orelse|10 query receive rem try when xor',
     literal:
       'false true'
   };
 
-  var COMMENT = {
-    className: 'comment',
-    begin: '%', end: '$'
-  };
+  var COMMENT = hljs.COMMENT('%', '$');
   var NUMBER = {
     className: 'number',
     begin: '\\b(\\d+#[a-fA-F0-9]+|\\d+(\\.\\d+)?([eE][-+]?\\d+)?)',
@@ -33,8 +31,7 @@ function(hljs) {
     relevance: 0,
     contains: [
       {
-        className: 'function_name', begin: FUNCTION_NAME_RE,
-        relevance: 0
+        begin: FUNCTION_NAME_RE, relevance: 0
       },
       {
         begin: '\\(', end: '\\)', endsWithParent: true,
@@ -45,18 +42,15 @@ function(hljs) {
     ]
   };
   var TUPLE = {
-    className: 'tuple',
     begin: '{', end: '}',
     relevance: 0
     // "contains" defined later
   };
   var VAR1 = {
-    className: 'variable',
     begin: '\\b_([A-Z][A-Za-z0-9_]*)?',
     relevance: 0
   };
   var VAR2 = {
-    className: 'variable',
     begin: '[A-Z][a-zA-Z0-9_]*',
     relevance: 0
   };
@@ -66,7 +60,6 @@ function(hljs) {
     returnBegin: true,
     contains: [
       {
-        className: 'record_name',
         begin: '#' + hljs.UNDERSCORE_IDENT_RE,
         relevance: 0
       },
@@ -137,7 +130,6 @@ function(hljs) {
       },
       COMMENT,
       {
-        className: 'pp',
         begin: '^-', end: '\\.',
         relevance: 0,
         excludeEnd: true,

@@ -2,6 +2,7 @@
 Language: Elixir
 Author: Josh Adams <josh@isotope11.com>
 Description: language definition for Elixir source code files (.ex and .exs).  Based on ruby language support.
+Category: functional
 */
 
 function(hljs) {
@@ -29,39 +30,28 @@ function(hljs) {
       }
     ]
   };
-  var PARAMS = {
-    endsWithParent: true, returnEnd: true,
-    lexemes: ELIXIR_IDENT_RE,
-    keywords: ELIXIR_KEYWORDS,
-    relevance: 0
-  };
   var FUNCTION = {
     className: 'function',
-    beginKeywords: 'def defmacro', end: /\bdo\b/,
+    beginKeywords: 'def defp defmacro', end: /\B\b/, // the mode is ended by the title
     contains: [
       hljs.inherit(hljs.TITLE_MODE, {
-        begin: ELIXIR_METHOD_RE,
-        starts: PARAMS
+        begin: ELIXIR_IDENT_RE,
+        endsParent: true
       })
     ]
   };
   var CLASS = hljs.inherit(FUNCTION, {
     className: 'class',
-    beginKeywords: 'defmodule defrecord', end: /\bdo\b|$|;/
-  })
+    beginKeywords: 'defimpl defmodule defprotocol defrecord', end: /\bdo\b|$|;/
+  });
   var ELIXIR_DEFAULT_CONTAINS = [
     STRING,
     hljs.HASH_COMMENT_MODE,
     CLASS,
     FUNCTION,
     {
-      className: 'constant',
-      begin: '(\\b[A-Z_]\\w*(.)?)+',
-      relevance: 0
-    },
-    {
       className: 'symbol',
-      begin: ':',
+      begin: ':(?!\\s)',
       contains: [STRING, {begin: ELIXIR_METHOD_RE}],
       relevance: 0
     },
@@ -104,7 +94,6 @@ function(hljs) {
     }
   ];
   SUBST.contains = ELIXIR_DEFAULT_CONTAINS;
-  PARAMS.contains = ELIXIR_DEFAULT_CONTAINS;
 
   return {
     lexemes: ELIXIR_IDENT_RE,

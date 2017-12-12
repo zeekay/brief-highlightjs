@@ -1,6 +1,7 @@
 /*
 Language: Axapta
 Author: Dmitri Roudakov <dmitri@roudakov.ru>
+Category: enterprise
 */
 
 function(hljs) {
@@ -18,7 +19,7 @@ function(hljs) {
       hljs.QUOTE_STRING_MODE,
       hljs.C_NUMBER_MODE,
       {
-        className: 'preprocessor',
+        className: 'meta',
         begin: '#', end: '$'
       },
       {
@@ -26,11 +27,7 @@ function(hljs) {
         beginKeywords: 'class interface', end: '{', excludeEnd: true,
         illegal: ':',
         contains: [
-          {
-            className: 'inheritance',
-            beginKeywords: 'extends implements',
-            relevance: 10
-          },
+          {beginKeywords: 'extends implements'},
           hljs.UNDERSCORE_TITLE_MODE
         ]
       }

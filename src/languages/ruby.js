@@ -1,40 +1,45 @@
 /*
 Language: Ruby
 Author: Anton Kovalyov <anton@kovalyov.net>
-Contributors: Peter Leonov <gojpeg@yandex.ru>, Vasily Polovnyov <vast@whiteants.net>, Loren Segal <lsegal@soen.ca>, Pascal Hurni <phi@ruby-reactive.org>
+Contributors: Peter Leonov <gojpeg@yandex.ru>, Vasily Polovnyov <vast@whiteants.net>, Loren Segal <lsegal@soen.ca>, Pascal Hurni <phi@ruby-reactive.org>, Cedric Sohrauer <sohrauer@googlemail.com>
+Category: common
 */
 
 function(hljs) {
   var RUBY_METHOD_RE = '[a-zA-Z_]\\w*[!?=]?|[-+~]\\@|<<|>>|=~|===?|<=>|[<>]=?|\\*\\*|[-/+%^&*~`|]|\\[\\]=?';
-  var RUBY_KEYWORDS =
-    'and false then defined module in return redo if BEGIN retry end for true self when ' +
-    'next until do begin unless END rescue nil else break undef not super class case ' +
-    'require yield alias while ensure elsif or include attr_reader attr_writer attr_accessor';
+  var RUBY_KEYWORDS = {
+    keyword:
+      'and then defined module in return redo if BEGIN retry end for self when ' +
+      'next until do begin unless END rescue else break undef not super class case ' +
+      'require yield alias while ensure elsif or include attr_reader attr_writer attr_accessor',
+    literal:
+      'true false nil'
+  };
   var YARDOCTAG = {
-    className: 'yardoctag',
+    className: 'doctag',
     begin: '@[A-Za-z]+'
   };
   var IRB_OBJECT = {
-    className: 'value',
     begin: '#<', end: '>'
   };
-  var COMMENT = {
-    className: 'comment',
-    variants: [
+  var COMMENT_MODES = [
+    hljs.COMMENT(
+      '#',
+      '$',
       {
-        begin: '#', end: '$',
         contains: [YARDOCTAG]
-      },
+      }
+    ),
+    hljs.COMMENT(
+      '^\\=begin',
+      '^\\=end',
       {
-        begin: '^\\=begin', end: '^\\=end',
         contains: [YARDOCTAG],
         relevance: 10
-      },
-      {
-        begin: '^__END__', end: '\\n$'
       }
-    ]
-  };
+    ),
+    hljs.COMMENT('^__END__', '\\n$')
+  ];
   var SUBST = {
     className: 'subst',
     begin: '#\\{', end: '}',
@@ -46,31 +51,34 @@ function(hljs) {
     variants: [
       {begin: /'/, end: /'/},
       {begin: /"/, end: /"/},
-      {begin: '%[qw]?\\(', end: '\\)'},
-      {begin: '%[qw]?\\[', end: '\\]'},
-      {begin: '%[qw]?{', end: '}'},
-      {begin: '%[qw]?<', end: '>'},
-      {begin: '%[qw]?/', end: '/'},
-      {begin: '%[qw]?%', end: '%'},
-      {begin: '%[qw]?-', end: '-'},
-      {begin: '%[qw]?\\|', end: '\\|'},
+      {begin: /`/, end: /`/},
+      {begin: '%[qQwWx]?\\(', end: '\\)'},
+      {begin: '%[qQwWx]?\\[', end: '\\]'},
+      {begin: '%[qQwWx]?{', end: '}'},
+      {begin: '%[qQwWx]?<', end: '>'},
+      {begin: '%[qQwWx]?/', end: '/'},
+      {begin: '%[qQwWx]?%', end: '%'},
+      {begin: '%[qQwWx]?-', end: '-'},
+      {begin: '%[qQwWx]?\\|', end: '\\|'},
       {
         // \B in the beginning suppresses recognition of ?-sequences where ?
         // is the last character of a preceding identifier, as in: `func?4`
         begin: /\B\?(\\\d{1,3}|\\x[A-Fa-f0-9]{1,2}|\\u[A-Fa-f0-9]{4}|\\?\S)\b/
+      },
+      {
+        begin: /<<(-?)\w+$/, end: /^\s*\w+$/,
       }
     ]
   };
   var PARAMS = {
     className: 'params',
-    begin: '\\(', end: '\\)',
+    begin: '\\(', end: '\\)', endsParent: true,
     keywords: RUBY_KEYWORDS
   };
 
   var RUBY_DEFAULT_CONTAINS = [
     STRING,
     IRB_OBJECT,
-    COMMENT,
     {
       className: 'class',
       beginKeywords: 'class module', end: '$|;',
@@ -78,40 +86,34 @@ function(hljs) {
       contains: [
         hljs.inherit(hljs.TITLE_MODE, {begin: '[A-Za-z_]\\w*(::\\w+)*(\\?|\\!)?'}),
         {
-          className: 'inheritance',
           begin: '<\\s*',
           contains: [{
-            className: 'parent',
             begin: '(' + hljs.IDENT_RE + '::)?' + hljs.IDENT_RE
           }]
-        },
-        COMMENT
-      ]
+        }
+      ].concat(COMMENT_MODES)
     },
     {
       className: 'function',
-      beginKeywords: 'def', end: ' |$|;',
-      relevance: 0,
+      beginKeywords: 'def', end: '$|;',
       contains: [
         hljs.inherit(hljs.TITLE_MODE, {begin: RUBY_METHOD_RE}),
-        PARAMS,
-        COMMENT
-      ]
+        PARAMS
+      ].concat(COMMENT_MODES)
     },
     {
-      className: 'constant',
-      begin: '(::)?(\\b[A-Z]\\w*(::)?)+',
-      relevance: 0
-    },
-    {
-      className: 'symbol',
-      begin: ':',
-      contains: [STRING, {begin: RUBY_METHOD_RE}],
-      relevance: 0
+      // swallow namespace qualifiers before symbols
+      begin: hljs.IDENT_RE + '::'
     },
     {
       className: 'symbol',
       begin: hljs.UNDERSCORE_IDENT_RE + '(\\!|\\?)?:',
+      relevance: 0
+    },
+    {
+      className: 'symbol',
+      begin: ':(?!\\s)',
+      contains: [STRING, {begin: RUBY_METHOD_RE}],
       relevance: 0
     },
     {
@@ -120,14 +122,18 @@ function(hljs) {
       relevance: 0
     },
     {
-      className: 'variable',
-      begin: '(\\$\\W)|((\\$|\\@\\@?)(\\w+))'
+      begin: '(\\$\\W)|((\\$|\\@\\@?)(\\w+))' // variables
+    },
+    {
+      className: 'params',
+      begin: /\|/, end: /\|/,
+      keywords: RUBY_KEYWORDS
     },
     { // regexp container
-      begin: '(' + hljs.RE_STARTERS_RE + ')\\s*',
+      begin: '(' + hljs.RE_STARTERS_RE + '|unless)\\s*',
+      keywords: 'unless',
       contains: [
         IRB_OBJECT,
-        COMMENT,
         {
           className: 'regexp',
           contains: [hljs.BACKSLASH_ESCAPE, SUBST],
@@ -140,51 +146,38 @@ function(hljs) {
             {begin: '%r\\[', end: '\\][a-z]*'}
           ]
         }
-      ],
+      ].concat(COMMENT_MODES),
       relevance: 0
     }
-  ];
+  ].concat(COMMENT_MODES);
+
   SUBST.contains = RUBY_DEFAULT_CONTAINS;
   PARAMS.contains = RUBY_DEFAULT_CONTAINS;
-  
+
+  var SIMPLE_PROMPT = "[>?]>";
+  var DEFAULT_PROMPT = "[\\w#]+\\(\\w+\\):\\d+:\\d+>";
+  var RVM_PROMPT = "(\\w+-)?\\d+\\.\\d+\\.\\d(p\\d+)?[^>]+>";
+
   var IRB_DEFAULT = [
     {
-      relevance: 1,
-      className: 'output',
-      begin: '^\\s*=> ', end: "$",
-      returnBegin: true,
-      contains: [
-        {
-          className: 'status',
-          begin: '^\\s*=>'
-        },
-        {
-          begin: ' ', end: '$',
-          contains: RUBY_DEFAULT_CONTAINS
-        }
-      ]
+      begin: /^\s*=>/,
+      starts: {
+        end: '$', contains: RUBY_DEFAULT_CONTAINS
+      }
     },
     {
-      relevance: 1,
-      className: 'input',
-      begin: '^[^ ][^=>]*>+ ', end: "$",
-      returnBegin: true,
-      contains: [
-        {
-          className: 'prompt',
-          begin: '^[^ ][^=>]*>+'
-        },
-        {
-          begin: ' ', end: '$',
-          contains: RUBY_DEFAULT_CONTAINS
-        }
-      ]
+      className: 'meta',
+      begin: '^('+SIMPLE_PROMPT+"|"+DEFAULT_PROMPT+'|'+RVM_PROMPT+')',
+      starts: {
+        end: '$', contains: RUBY_DEFAULT_CONTAINS
+      }
     }
   ];
 
   return {
     aliases: ['rb', 'gemspec', 'podspec', 'thor', 'irb'],
     keywords: RUBY_KEYWORDS,
-    contains: IRB_DEFAULT.concat(RUBY_DEFAULT_CONTAINS)
+    illegal: /\/\*/,
+    contains: COMMENT_MODES.concat(IRB_DEFAULT).concat(RUBY_DEFAULT_CONTAINS)
   };
 }

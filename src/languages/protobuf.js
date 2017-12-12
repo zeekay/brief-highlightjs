@@ -2,12 +2,13 @@
 Language: Protocol Buffers
 Author: Dan Tao <daniel.tao@gmail.com>
 Description: Protocol buffer message definition format
+Category: protocols
 */
 
 function(hljs) {
   return {
     keywords: {
-      keyword: 'package import option optional required repeated group',
+      keyword: 'package import option optional required repeated group oneof',
       built_in: 'double float int32 int64 uint32 uint64 sint32 sint64 ' +
         'fixed32 fixed64 sfixed32 sfixed64 bool string bytes',
       literal: 'true false'
@@ -33,7 +34,6 @@ function(hljs) {
         keywords: 'rpc returns'
       },
       {
-        className: 'constant',
         begin: /^\s*[A-Z_]+/,
         end: /\s*=/, excludeEnd: true
       }
