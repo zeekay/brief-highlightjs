@@ -20,7 +20,7 @@
     "type": "git",
     "url": "git://github.com/zeekay/brief-highlightjs.git"
   },
-  "main": "./lib/index.js",
+  "main": "./build/lib/index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha test/",
     "test-browser": "./node_modules/.bin/mocha test/browser/"
