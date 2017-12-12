@@ -5,7 +5,7 @@
     "highlight",
     "syntax"
   ],
-  "homepage": "https://github.com/zeekay/highlight.js",
+  "homepage": "https://github.com/zeekay/brief-highlightjs",
   "version": "9.12.0",
   "author": {
     "name": "Ivan Sagalaev",
@@ -13,12 +13,12 @@
   },
   "contributors": [],
   "bugs": {
-    "url": "https://github.com/zeekay/highlight.js/issues"
+    "url": "https://github.com/zeekay/brief-highlightjs/issues"
   },
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
-    "url": "git://github.com/zeekay/highlight.js.git"
+    "url": "git://github.com/zeekay/brief-highlightjs.git"
   },
   "main": "./lib/index.js",
   "scripts": {
